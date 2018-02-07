@@ -1,6 +1,6 @@
 import common_functions as cf
 
-def fx_coid_dept_clinician_count():
+def coid_dept_clinician_count():
     sql = """
     select
        cad.clinic_coid & '.' & cad.dept as coid_dept,
@@ -16,7 +16,7 @@ def fx_coid_dept_clinician_count():
     dt = {r[0]: r[1] for r in lt}
     return dt
 
-def fx_clinician_shared_gl_status(coid_dept_count,
+def clinician_shared_gl_status(coid_dept_count,
                                   clinician_coid_dept):
     d1 = {}
     for k in clinician_coid_dept:
@@ -29,8 +29,7 @@ def fx_clinician_shared_gl_status(coid_dept_count,
             d1[k] = 1
     return d1
     
-    
-    
+
     
 
 
