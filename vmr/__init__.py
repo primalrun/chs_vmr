@@ -22,14 +22,14 @@ date_dict = date_logic.get_date_logic('12/1/2017')
 
 #date dict to get period
 date_to_period = date_logic.date_to_period(date_dict)
- 
+
 #coid.dept dict, clinician count 
 gl_clinician_count = coid_dept.coid_dept_clinician_count()
 
 #npi dict, [coid.dept]
 clinician_coid_dept = clinician_demo.clinician_coid_dept()
 
-#npi dict, [division, top market, market, clinic, coid, employed, clinician,
+#npi dict, [division, top market, market, state, clinic, coid, employed, clinician,
 #specialty, fte, category, tenure, start date, term date, provider type, 
 #hospital
 clinician_attribute = clinician_demo.clinician_attributes()
@@ -94,10 +94,11 @@ df_period = pd.DataFrame.from_dict(date_dict, orient='index')
 df_period.index.name = 'period'
 df_period.columns = ['period_date']
 
-file_name = dir_path + r'vmr_output.xlsx'
+#output.xlsx
+file_output = dir_path + r'vmr_output.xlsx'
 with contextlib.suppress(FileNotFoundError):
-    os.remove(file_name)
-writer = pd.ExcelWriter(file_name)
+    os.remove(file_output)
+writer = pd.ExcelWriter(file_output)
 df_fin_monthly.to_excel(writer, 'fin_mth', index=False)
 df_fin_ytd.to_excel(writer, 'fin_ytd', index=True)
 df_fin_trend.to_excel(writer, 'fin_trend', index=True)
@@ -116,6 +117,8 @@ df_fin_prod_rank_trend.to_excel(writer, 'fin_prod_rank_trend', index=False)
 df_ca.to_excel(writer, 'clinician')
 df_period.to_excel(writer, 'period')
 writer.save()
+
+
 
 print('Done')
 

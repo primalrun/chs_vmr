@@ -30,7 +30,7 @@ def get_date_logic(default_date):
 def date_to_period(date_dict):
     d = {}
     for k in date_dict:
-        if k.endswith('s'):
+        if k.endswith('s') and not k.startswith('cy'):
             d[date_dict[k]] = k.split('_')[0]
     return d
 

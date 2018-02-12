@@ -29,17 +29,15 @@ def clinician_production(clinician_audit, date_dict):
        ad.npi,
        f.post_period as rpt_period,
        sum(f.cms_adj_wrvu) as wrvu
-    from (((cms_adj_wrvu_month f
+    from ((cms_adj_wrvu_month f
        inner join tblGLToAthena gta
           on f.tablespace = gta.tablespace
           and f.rendering_provider = gta.renderingprovider)
        inner join athena_dim_data ad
           on f.tablespace = ad.tablespace
           and f.rendering_provider = ad.rendering_provider)
-       inner join clinician_accounting_demographics cad
-          on ad.npi = cad.npi)
        inner join npi_prod p
-          on cad.npi = p.npi 
+          on ad.npi = p.npi 
     where
        f.post_period between #{}# and #{}#
     group by
@@ -56,17 +54,15 @@ def clinician_production(clinician_audit, date_dict):
        ad.npi,
        f.post_period as rpt_period,
        sum(f.pat_encounter) as visit
-    from (((patient_encounter_month f
+    from ((patient_encounter_month f
        inner join tblGLToAthena gta
           on f.tablespace = gta.tablespace
           and f.rendering_provider = gta.renderingprovider)
        inner join athena_dim_data ad
           on f.tablespace = ad.tablespace
           and f.rendering_provider = ad.rendering_provider)
-       inner join clinician_accounting_demographics cad
-          on ad.npi = cad.npi)
        inner join npi_prod p
-          on cad.npi = p.npi 
+          on ad.npi = p.npi 
     where
        f.post_period between #{}# and #{}#
     group by
@@ -84,17 +80,15 @@ def clinician_production(clinician_audit, date_dict):
        f.post_period as rpt_period,
        sum(f.charge) as charge,
        sum(f.net_payment) as collection
-    from (((charge_payment_adjustment f
+    from ((charge_payment_adjustment f
        inner join tblGLToAthena gta
           on f.tablespace = gta.tablespace
           and f.rendering_provider = gta.renderingprovider)
        inner join athena_dim_data ad
           on f.tablespace = ad.tablespace
           and f.rendering_provider = ad.rendering_provider)
-       inner join clinician_accounting_demographics cad
-          on ad.npi = cad.npi)
        inner join npi_prod p
-          on cad.npi = p.npi 
+          on ad.npi = p.npi 
     where
        f.post_period between #{}# and #{}#
     group by
