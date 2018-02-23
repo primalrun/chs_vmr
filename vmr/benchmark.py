@@ -221,14 +221,14 @@ def calculate_benchmark(clinician_audit, bm_dict, prod_df_dict,
     df1['wrvu_to_visit'] = df1.apply(
         lambda row: (row.wrvu / row.visit) if row.visit != 0 else None, axis=1)
     l1 = list(zip(df1.npi, df1.wrvu))
-    bm_rank = cf.benchmark_rank_ytd(
+    bm_rank = cf.benchmark_rank_trend(
         l1, clinician_audit, bm_dict['wrvu'])
     #make series from list
     se = pd.Series(bm_rank)
     df1['wrvu_rank'] = se.values    
     #wrvu to visit
     l1 = list(zip(df1.npi, df1.wrvu, df1.visit))
-    bm_rank = cf.benchmark_ratio_rank_ytd(
+    bm_rank = cf.benchmark_ratio_rank_trend(
         l1, clinician_audit, bm_dict['wrvu_to_visit'])
     #make series from list
     se = pd.Series(bm_rank)
@@ -327,14 +327,14 @@ def calculate_benchmark(clinician_audit, bm_dict, prod_df_dict,
         if row.collection != 0 else None, axis=1)    
     #comp
     l1 = list(zip(df1.npi, df1.comp))
-    bm_rank = cf.benchmark_rank_ytd(
+    bm_rank = cf.benchmark_rank_trend(
         l1, clinician_audit, bm_dict['comp'])
     #make series from list
     se = pd.Series(bm_rank)
     df1['comp_rank'] = se.values
     #coll
     l1 = list(zip(df1.npi, df1.collection))
-    bm_rank = cf.benchmark_rank_ytd(
+    bm_rank = cf.benchmark_rank_trend(
         l1, clinician_audit, bm_dict['coll'])
     #make series from list
     se = pd.Series(bm_rank)
@@ -422,7 +422,7 @@ def calculate_benchmark(clinician_audit, bm_dict, prod_df_dict,
         lambda row: (row.comp / row.wrvu) 
         if row.wrvu != 0 else None, axis=1)
     l1 = list(zip(df1.npi, df1.comp, df1.wrvu))
-    bm_rank = cf.benchmark_ratio_rank_ytd(
+    bm_rank = cf.benchmark_ratio_rank_trend(
         l1, clinician_audit, bm_dict['comp_to_wrvu'])
     #make series from list
     se = pd.Series(bm_rank)
@@ -432,7 +432,7 @@ def calculate_benchmark(clinician_audit, bm_dict, prod_df_dict,
         lambda row: (row.collection / row.wrvu) 
         if row.wrvu != 0 else None, axis=1)
     l1 = list(zip(df1.npi, df1.collection, df1.wrvu))
-    bm_rank = cf.benchmark_ratio_rank_ytd(
+    bm_rank = cf.benchmark_ratio_rank_trend(
         l1, clinician_audit, bm_dict['coll_to_wrvu'])
     #make series from list
     se = pd.Series(bm_rank)

@@ -149,3 +149,39 @@ def benchmark_ratio_rank_ytd(i_list, clinician_audit, bm_dict):
         else:
             bm_rank.append(None)         
     return bm_rank
+
+def benchmark_rank_trend(i_list, clinician_audit, bm_dict):
+    bm_rank = []    
+    for x in i_list:
+        specialty = clinician_audit[x[0]]['specialty']        
+        anlz_f = clinician_audit[x[0]]['anlz_f_trend']
+        bm_list = bm_dict[specialty]        
+        if len(bm_list) == 0:                                    
+            bm_rank.append(None)                    
+        elif anlz_f != None:
+            anlz_amount = x[1] * float(anlz_f)                        
+            bm_rank.append(rank_calc(anlz_amount, bm_list))            
+        else:
+            bm_rank.append(None)         
+    return bm_rank
+
+def benchmark_ratio_rank_trend(i_list, clinician_audit, bm_dict):
+    bm_rank = []    
+    for x in i_list:
+        specialty = clinician_audit[x[0]]['specialty']        
+        anlz_f = clinician_audit[x[0]]['anlz_f_trend']
+        bm_list = bm_dict[specialty]        
+        if len(bm_list) == 0:                                    
+            bm_rank.append(None)
+        elif math.isnan(x[2]) == True:
+            bm_rank.append(None)
+        elif x[2] == 0:
+            bm_rank.append(None)                  
+        elif anlz_f != None:
+            anlz_num = x[1] * float(anlz_f)
+            anlz_denom = x[2] * float(anlz_f)
+            anlz_amount = anlz_num / anlz_denom                        
+            bm_rank.append(rank_calc(anlz_amount, bm_list))            
+        else:
+            bm_rank.append(None)         
+    return bm_rank
