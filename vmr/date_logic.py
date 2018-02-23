@@ -12,9 +12,11 @@ def get_date_logic(default_date):
     cm_s = datetime.strptime(cmd1_s, '%m/%d/%Y')
     cm_e = cm_s + relativedelta(days=monthrange(cm_s.year, cm_s.month)[1] - 1)
     cy_s = cm_s + relativedelta(months=-(cm_s.month - 1))
+    cy_e = (cy_s + relativedelta(months=12)) + relativedelta(days=-1)
     date_logic_dict = {'cm_s': cm_s,
                      'cm_e': cm_e,
-                     'cy_s': cy_s}
+                     'cy_s': cy_s,
+                     'cy_e': cy_e}
     dte_s = cm_s
     for x in range(1, 12):
         str_s = 'pm' + str(x) + '_s'

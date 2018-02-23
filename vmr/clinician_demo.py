@@ -117,7 +117,7 @@ def clinician_audit_coid_dept(clinician_audit, clinician_coid_dept):
 def clinician_audit_workdays(clinician_audit, date_dict):
     ytd_work_days_possible = date_logic.work_days_possible(
         date_dict['cy_s'],
-        date_dict['cm_e'])    
+        date_dict['cy_e'])    
     trend_12_work_days_possible = date_logic.work_days_possible(
         date_dict['pm11_s'],
         date_dict['cm_e'])    
