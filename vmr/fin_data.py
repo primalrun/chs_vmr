@@ -6,7 +6,7 @@ import pandas as pd
 
 def clinician_financial(clinician_audit, clinician_coid_dept, date_dict):    
     npi_gl = []
-    for k in clinician_coid_dept:
+    for k in clinician_audit:
         if clinician_audit[k]['shared_gl'] == 0:
             for e in range(0, len(clinician_coid_dept[k])):
                 coid_dept = str(clinician_coid_dept[k][e]).split('.')

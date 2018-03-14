@@ -18,7 +18,7 @@ pathlib.Path(dir_path).mkdir(parents=True, exist_ok=True)
 
 #default value if argument populated
 #period dict, date
-date_dict = date_logic.get_date_logic('1/1/2018')
+date_dict = date_logic.get_date_logic('2/1/2018')
 
 #date dict to get period
 date_to_period = date_logic.date_to_period(date_dict)
